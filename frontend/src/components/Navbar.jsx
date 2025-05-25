@@ -7,7 +7,7 @@ const Navbar = () => {
       <div className="space-x-4">
         <Link to="/" className="text-blue-600">
           Home
-        </Link>
+      </Link>
       </div>
     </nav>
   );

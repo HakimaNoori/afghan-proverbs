@@ -11,12 +11,22 @@ const EditProverb = () => {
     meaning: "",
     category: "",
   });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/proverbs/${id}`)
-      .then((res) => res.json())
-      .then((data) => setForm(data))
-      .catch((err) => console.error("خطا در دریافت داده", err));
+    fetch(`/api/proverbs/${id}`)
+      .then((res) => {
+        if (!res.ok) throw new Error("خطا در دریافت ضرب‌المثل");
+        return res.json();
+      })
+      .then((data) => {
+        setForm(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("خطا در دریافت داده", err);
+        setLoading(false);
+      });
   }, [id]);
 
   const handleChange = (e) => {
@@ -25,19 +35,20 @@ const EditProverb = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const res = await fetch(`http://localhost:3000/api/proverbs/${id}`, {
+    const res = await fetch(`/api/proverbs/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
     });
 
     if (res.ok) {
-      navigate("/"); // بعد از ویرایش به صفحه اصلی برگرد
+      navigate("/");
     } else {
       alert("خطا در ویرایش ضرب‌المثل");
     }
   };
+
+  if (loading) return <p>در حال بارگذاری اطلاعات ضرب‌المثل...</p>;
 
   return (
     <div className="max-w-xl mx-auto mt-8 p-4 border shadow rounded">
