@@ -4,28 +4,11 @@ import SearchBar from "./SearchBar";
 
 const ProverbList = () => {
   const [proverbs, setProverbs] = useState([]);
-  const [query, setQuery] = useState("");
-
-  const filteredProverbs = proverbs.filter((p) =>
-    [p.textDari, p.textPashto, p.translationEn, p.meaning, p.category]
-      .join(" ")
-      .toLowerCase()
-      .includes(query.toLowerCase())
-  );
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const isLocal =
-    window.location.hostname === "localhost" ||
-    window.location.hostname === "127.0.0.1";
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;
-  const apiBaseUrl = isLocal ? "" : backendUrl;
-    
-  console.log("API Base URL:", apiBaseUrl);
-
   const fetchData = () => {
-    fetch(`${apiBaseUrl}/api/proverbs`)
+    fetch("/api/proverbs")
       .then((res) => {
         if (!res.ok) throw new Error("خطا در دریافت داده‌ها");
         return res.json();
@@ -46,9 +29,7 @@ const ProverbList = () => {
 
   const handleDelete = async (id) => {
     if (window.confirm("آیا مطمئنی که می‌خواهی حذف کنی؟")) {
-      const res = await fetch(`${apiBaseUrl}/api/proverbs/${id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(`/api/proverbs/${id}`, { method: "DELETE" });
       if (res.ok) {
         fetchData();
       }
