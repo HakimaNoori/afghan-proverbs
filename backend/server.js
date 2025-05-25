@@ -1,10 +1,19 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const mongoose = require("mongoose");
 const proverbRoutes = require("./routes/ProverbRoutes.js");
 
 const PORT = process.env.PORT || 3000;
+
+// Enable CORS for your frontend domain
+app.use(cors({
+  origin: "https://afghan-proverbs-5.onrender.com", 
+  methods: ["GET", "POST", "PUT", "DELETE"], 
+  credentials: true, 
+}));
+
 app.use(express.json());
 app.use("/api/proverbs", proverbRoutes);
 
