@@ -1,1 +1,4 @@
 # afghan-proverbs
+Afghan Proverbs is a dedicated online platform that preserves and showcases the rich heritage of traditional Afghan proverbs. Designed with simplicity and user-friendliness in mind, the site offers a vast collection of authentic proverbs, each accompanied by translations and detailed explanations. These proverbs reflect the wisdom, culture, and values passed down through generations in Afghanistan.
+
+The platform serves as a valuable resource for researchers, linguists, cultural enthusiasts, and anyone interested in exploring Afghan oral traditions. It also provides language learners with meaningful content to deepen their understanding of Dari and Pashto languages. By bridging cultural gaps and promoting Afghan heritage, Afghan Proverbs fosters appreciation and knowledge of one of the world’s oldest oral traditions.
