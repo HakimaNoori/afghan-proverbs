@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { getApiBaseUrl } from "../utils/getApiBaseUrl";
+
 
 const EditProverb = () => {
   const { id } = useParams();
@@ -12,9 +14,10 @@ const EditProverb = () => {
     category: "",
   });
   const [loading, setLoading] = useState(true);
+    const apiBaseUrl = getApiBaseUrl();
 
   useEffect(() => {
-    fetch(`/api/proverbs/${id}`)
+    fetch(`${apiBaseUrl}/api/proverbs/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("خطا در دریافت ضرب‌المثل");
         return res.json();
