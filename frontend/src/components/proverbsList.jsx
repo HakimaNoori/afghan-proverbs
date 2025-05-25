@@ -6,8 +6,14 @@ const ProverbList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const isLocal =
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1";
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const apiBaseUrl = isLocal ? "" : backendUrl;
+
   const fetchData = () => {
-    fetch("/api/proverbs")
+    fetch(`${apiBaseUrl}/api/proverbs`)
       .then((res) => {
         if (!res.ok) throw new Error("خطا در دریافت داده‌ها");
         return res.json();
@@ -28,7 +34,9 @@ const ProverbList = () => {
 
   const handleDelete = async (id) => {
     if (window.confirm("آیا مطمئنی که می‌خواهی حذف کنی؟")) {
-      const res = await fetch(`/api/proverbs/${id}`, { method: "DELETE" });
+      const res = await fetch(`${apiBaseUrl}/api/proverbs/${id}`, {
+        method: "DELETE",
+      });
       if (res.ok) {
         fetchData();
       }
