@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { getApiBaseUrl } from "../utils/getApiBaseUrl";
 
 const AddProverb = ({ onAdd }) => {
   const [form, setForm] = useState({
@@ -13,9 +14,11 @@ const AddProverb = ({ onAdd }) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const apiBaseUrl = getApiBaseUrl();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("/api/proverbs", {
+    const res = await fetch(`${apiBaseUrl}/api/proverbs`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),

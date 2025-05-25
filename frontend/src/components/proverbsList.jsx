@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { getApiBaseUrl } from "../utils/getApiBaseUrl";
 import { Link } from "react-router-dom";
 
 const ProverbList = () => {
@@ -6,11 +7,7 @@ const ProverbList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const isLocal =
-    window.location.hostname === "localhost" ||
-    window.location.hostname === "127.0.0.1";
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;
-  const apiBaseUrl = isLocal ? "" : backendUrl;
+  const apiBaseUrl = getApiBaseUrl();
 
   const fetchData = () => {
     fetch(`${apiBaseUrl}/api/proverbs`)
