@@ -21,6 +21,8 @@ const ProverbList = () => {
     window.location.hostname === "127.0.0.1";
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const apiBaseUrl = isLocal ? "" : backendUrl;
+    
+  console.log("API Base URL:", apiBaseUrl);
 
   const fetchData = () => {
     fetch(`${apiBaseUrl}/api/proverbs`)
